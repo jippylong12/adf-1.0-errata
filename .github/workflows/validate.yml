@@ -17,5 +17,8 @@ jobs:
           sudo apt-get install -y libxml2-utils
 
       - name: Validate schemas and examples
-        run: ./scripts/validate.sh
-
+        run: |
+          ./scripts/validate.sh
+          ./scripts/validate-input.sh --file ./examples/minimal-prospect.xml
+          ./scripts/validate-input.sh --file ./examples/minimal-prospect.xml --strict
+          cat ./examples/full-prospect.xml | ./scripts/validate-input.sh --stdin

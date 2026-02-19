@@ -24,3 +24,9 @@
 - **Topic:** Customer Timeframe Semantics
   **Rule:** Model `timeframe` as `description?` followed by one or more of `earliestdate`/`latestdate`, never plain `#PCDATA`.
   **Reason:** This reflects corrected baseline intent and uses the declared timeframe subelements consistently.
+- **Topic:** External XML Validation Entry Point
+  **Rule:** Keep fixture validation in `scripts/validate.sh` and validate arbitrary user XML through `scripts/validate-input.sh` (`--file`, `--xml`, or `--stdin`).
+  **Reason:** This separates repository regression checks from ad-hoc user input validation without adding tooling complexity.
+- **Topic:** Practical Payload Validation
+  **Rule:** `scripts/validate-input.sh` should default to relaxed, order-insensitive checks; require `--strict` for full DTD/XSD enforcement.
+  **Reason:** Real-world vendor payloads often vary in element order while still carrying required business data.

@@ -15,6 +15,18 @@ Validate both examples against both schemas:
 ./scripts/validate.sh
 ```
 
+Validate your own ADF XML input (file/string/stdin):
+
+```bash
+# relaxed (default, order-insensitive)
+./scripts/validate-input.sh --file /path/to/lead.xml
+./scripts/validate-input.sh --xml '<adf>...</adf>'
+cat /path/to/lead.xml | ./scripts/validate-input.sh --stdin
+
+# strict (DTD/XSD content model + ordering)
+./scripts/validate-input.sh --file /path/to/lead.xml --strict
+```
+
 Run one-off checks manually:
 
 ```bash
@@ -38,10 +50,10 @@ xmllint --noout --schema schema/adf-1.0-errata.xsd examples/minimal-prospect.xml
 │   ├── adf-1.0-errata.dtd
 │   └── adf-1.0-errata.xsd
 └── scripts/
+    ├── validate-input.sh
     └── validate.sh
 ```
 
 ## Compatibility note
 
 Real-world vendor endpoints may accept subsets/supersets; this repo provides a consistent baseline.
-
