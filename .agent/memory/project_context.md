@@ -6,7 +6,8 @@
 - Validation is intentionally constrained to `xmllint` + shell for local and CI parity.
 - `timeframe` is modeled as structured content (`description?` + one or more date markers), not free text.
 - User-facing XML validation is provided by `scripts/validate-input.sh` with three input modes: `--file`, `--xml`, and `--stdin`.
-- `scripts/validate-input.sh` defaults to relaxed, order-insensitive validation; strict DTD/XSD validation is opt-in with `--strict`.
+- `scripts/validate-input.sh` defaults to order-insensitive schema validation by normalizing known child order before running DTD/XSD checks.
+- `--strict` enforces DTD/XSD on the original input order; `--relaxed` remains available for lightweight business checks only.
 - Even in relaxed mode, customer contact must include at least one `email` or `phone`.
 
 ## Gotchas

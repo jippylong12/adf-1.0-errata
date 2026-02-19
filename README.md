@@ -18,13 +18,16 @@ Validate both examples against both schemas:
 Validate your own ADF XML input (file/string/stdin):
 
 ```bash
-# relaxed (default, order-insensitive)
+# default: order-insensitive schema validation (reorders known children, then validates DTD/XSD)
 ./scripts/validate-input.sh --file /path/to/lead.xml
 ./scripts/validate-input.sh --xml '<adf>...</adf>'
 cat /path/to/lead.xml | ./scripts/validate-input.sh --stdin
 
-# strict (DTD/XSD content model + ordering)
+# strict: original-order DTD/XSD validation
 ./scripts/validate-input.sh --file /path/to/lead.xml --strict
+
+# relaxed: lightweight checks (well-formed + required business tags)
+./scripts/validate-input.sh --file /path/to/lead.xml --relaxed
 ```
 
 Run one-off checks manually:

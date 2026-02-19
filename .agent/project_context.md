@@ -28,8 +28,8 @@
   **Rule:** Keep fixture validation in `scripts/validate.sh` and validate arbitrary user XML through `scripts/validate-input.sh` (`--file`, `--xml`, or `--stdin`).
   **Reason:** This separates repository regression checks from ad-hoc user input validation without adding tooling complexity.
 - **Topic:** Practical Payload Validation
-  **Rule:** `scripts/validate-input.sh` should default to relaxed, order-insensitive checks; require `--strict` for full DTD/XSD enforcement.
-  **Reason:** Real-world vendor payloads often vary in element order while still carrying required business data.
+  **Rule:** `scripts/validate-input.sh` should default to order-insensitive schema validation (normalize order, then run DTD/XSD), with `--strict` for original-order checks.
+  **Reason:** Real-world vendor payloads vary in element order, but we still want full schema constraints enforced.
 - **Topic:** Relaxed Contactability Guardrail
   **Rule:** In relaxed mode, require every customer `contact` to have at least one `email` or `phone`.
   **Reason:** Order can vary in vendor payloads, but leads without any customer contact method are not actionable.
