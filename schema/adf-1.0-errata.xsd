@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="unqualified"
+           attributeFormDefault="unqualified">
+
+  <xs:simpleType name="binaryDigitType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0"/>
+      <xs:enumeration value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="prospectStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="new"/>
+      <xs:enumeration value="resend"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="vehicleInterestType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="buy"/>
+      <xs:enumeration value="lease"/>
+      <xs:enumeration value="sell"/>
+      <xs:enumeration value="trade-in"/>
+      <xs:enumeration value="test-drive"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="vehicleStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="new"/>
+      <xs:enumeration value="used"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="odometerStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="unknown"/>
+      <xs:enumeration value="rolledover"/>
+      <xs:enumeration value="replaced"/>
+      <xs:enumeration value="original"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="odometerUnitsType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="km"/>
+      <xs:enumeration value="mi"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="amountTypeKind">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="downpayment"/>
+      <xs:enumeration value="monthly"/>
+      <xs:enumeration value="total"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="amountLimitType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="maximum"/>
+      <xs:enumeration value="minimum"/>
+      <xs:enumeration value="exact"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="balanceTypeKind">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="finance"/>
+      <xs:enumeration value="residual"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="namePartType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="first"/>
+      <xs:enumeration value="middle"/>
+      <xs:enumeration value="suffix"/>
+      <xs:enumeration value="last"/>
+      <xs:enumeration value="full"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="nameKindType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="business"/>
+      <xs:enumeration value="individual"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="phoneTypeKind">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="voice"/>
+      <xs:enumeration value="fax"/>
+      <xs:enumeration value="cellphone"/>
+      <xs:enumeration value="pager"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="phoneTimeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="morning"/>
+      <xs:enumeration value="afternoon"/>
+      <xs:enumeration value="evening"/>
+      <xs:enumeration value="nopreference"/>
+      <xs:enumeration value="day"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="addressTypeKind">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="work"/>
+      <xs:enumeration value="home"/>
+      <xs:enumeration value="delivery"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="priceTypeKind">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="quote"/>
+      <xs:enumeration value="offer"/>
+      <xs:enumeration value="msrp"/>
+      <xs:enumeration value="invoice"/>
+      <xs:enumeration value="call"/>
+      <xs:enumeration value="appraisal"/>
+      <xs:enumeration value="asking"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="priceDeltaType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="absolute"/>
+      <xs:enumeration value="relative"/>
+      <xs:enumeration value="percentage"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="priceRelativeToType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="msrp"/>
+      <xs:enumeration value="invoice"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="idType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="sequence" type="xs:string" use="optional"/>
+        <xs:attribute name="source" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="nameType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="part" type="namePartType" default="full"/>
+        <xs:attribute name="type" type="nameKindType" default="individual"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="emailType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="preferredcontact" type="binaryDigitType" default="0"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="phoneType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="phoneTypeKind" default="voice"/>
+        <xs:attribute name="time" type="phoneTimeType" default="nopreference"/>
+        <xs:attribute name="preferredcontact" type="binaryDigitType" default="0"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="streetType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="line" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="addressType">
+    <xs:sequence>
+      <xs:element ref="street" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element ref="apartment" minOccurs="0"/>
+      <xs:element ref="city" minOccurs="0"/>
+      <xs:element ref="regioncode" minOccurs="0"/>
+      <xs:element ref="postalcode" minOccurs="0"/>
+      <xs:element ref="country" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="addressTypeKind" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="odometerType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="status" type="odometerStatusType" use="optional"/>
+        <xs:attribute name="units" type="odometerUnitsType" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="imagetagType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="width" type="xs:string" use="optional"/>
+        <xs:attribute name="height" type="xs:string" use="optional"/>
+        <xs:attribute name="alttext" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="priceType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="priceTypeKind" default="quote"/>
+        <xs:attribute name="currency" type="xs:string" use="optional"/>
+        <xs:attribute name="delta" type="priceDeltaType" use="optional"/>
+        <xs:attribute name="relativeto" type="priceRelativeToType" use="optional"/>
+        <xs:attribute name="source" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="amountType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="amountTypeKind" default="total"/>
+        <xs:attribute name="limit" type="amountLimitType" default="maximum"/>
+        <xs:attribute name="currency" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="balanceType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="balanceTypeKind" default="finance"/>
+        <xs:attribute name="currency" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="optionType">
+    <xs:sequence>
+      <xs:element ref="optionname"/>
+      <xs:element ref="manufacturercode" minOccurs="0"/>
+      <xs:element ref="stock" minOccurs="0"/>
+      <xs:element ref="weighting"/>
+      <xs:element ref="price" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="financeType">
+    <xs:sequence>
+      <xs:element ref="method"/>
+      <xs:element ref="amount" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element ref="balance" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="colorCombinationType">
+    <xs:sequence>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element ref="interiorcolor"/>
+          <xs:element ref="exteriorcolor" minOccurs="0"/>
+        </xs:sequence>
+        <xs:element ref="exteriorcolor"/>
+      </xs:choice>
+      <xs:element ref="preference"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="contactType">
+    <xs:sequence>
+      <xs:element ref="name" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element ref="email"/>
+          <xs:element ref="phone" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:element ref="phone" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:choice>
+      <xs:element ref="address" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="primarycontact" type="binaryDigitType" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="vehicleType">
+    <xs:sequence>
+      <xs:element ref="id" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="year"/>
+      <xs:element ref="make"/>
+      <xs:element ref="model"/>
+      <xs:element ref="vin" minOccurs="0"/>
+      <xs:element ref="stock" minOccurs="0"/>
+      <xs:element ref="trim" minOccurs="0"/>
+      <xs:element ref="doors" minOccurs="0"/>
+      <xs:element ref="bodystyle" minOccurs="0"/>
+      <xs:element ref="transmission" minOccurs="0"/>
+      <xs:element ref="odometer" minOccurs="0"/>
+      <xs:element ref="condition" minOccurs="0"/>
+      <xs:element ref="colorcombination" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="imagetag" minOccurs="0"/>
+      <xs:element ref="price" minOccurs="0"/>
+      <xs:element ref="pricecomments" minOccurs="0"/>
+      <xs:element ref="option" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="finance" minOccurs="0"/>
+      <xs:element ref="comments" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="interest" type="vehicleInterestType" default="buy"/>
+    <xs:attribute name="status" type="vehicleStatusType" default="new"/>
+  </xs:complexType>
+
+  <xs:complexType name="customerType">
+    <xs:sequence>
+      <xs:element ref="contact"/>
+      <xs:element ref="id" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="timeframe" minOccurs="0"/>
+      <xs:element ref="comments" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="timeframeType">
+    <xs:sequence>
+      <xs:element ref="description" minOccurs="0"/>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element ref="earliestdate"/>
+        <xs:element ref="latestdate"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="vendorType">
+    <xs:sequence>
+      <xs:element ref="id" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="vendorname"/>
+      <xs:element ref="url" minOccurs="0"/>
+      <xs:element ref="contact"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="providerType">
+    <xs:sequence>
+      <xs:element ref="id" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="name"/>
+      <xs:element ref="service" minOccurs="0"/>
+      <xs:element ref="url" minOccurs="0"/>
+      <xs:element ref="email" minOccurs="0"/>
+      <xs:element ref="phone" minOccurs="0"/>
+      <xs:element ref="contact" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="prospectType">
+    <xs:sequence>
+      <xs:element ref="id" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="requestdate"/>
+      <xs:element ref="vehicle" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element ref="customer"/>
+      <xs:element ref="vendor"/>
+      <xs:element ref="provider" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="status" type="prospectStatusType" default="new"/>
+  </xs:complexType>
+
+  <xs:complexType name="adfType">
+    <xs:sequence>
+      <xs:element ref="prospect" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="adf" type="adfType"/>
+  <xs:element name="prospect" type="prospectType"/>
+  <xs:element name="requestdate" type="xs:string"/>
+  <xs:element name="vehicle" type="vehicleType"/>
+  <xs:element name="id" type="idType"/>
+
+  <xs:element name="year" type="xs:string"/>
+  <xs:element name="make" type="xs:string"/>
+  <xs:element name="model" type="xs:string"/>
+  <xs:element name="vin" type="xs:string"/>
+  <xs:element name="stock" type="xs:string"/>
+  <xs:element name="trim" type="xs:string"/>
+  <xs:element name="doors" type="xs:string"/>
+  <xs:element name="bodystyle" type="xs:string"/>
+  <xs:element name="transmission" type="xs:string"/>
+  <xs:element name="odometer" type="odometerType"/>
+  <xs:element name="condition" type="xs:string"/>
+  <xs:element name="colorcombination" type="colorCombinationType"/>
+  <xs:element name="imagetag" type="imagetagType"/>
+  <xs:element name="price" type="priceType"/>
+  <xs:element name="pricecomments" type="xs:string"/>
+  <xs:element name="option" type="optionType"/>
+  <xs:element name="finance" type="financeType"/>
+  <xs:element name="comments" type="xs:string"/>
+
+  <xs:element name="interiorcolor" type="xs:string"/>
+  <xs:element name="exteriorcolor" type="xs:string"/>
+  <xs:element name="preference" type="xs:string"/>
+  <xs:element name="optionname" type="xs:string"/>
+  <xs:element name="manufacturercode" type="xs:string"/>
+  <xs:element name="weighting" type="xs:string"/>
+  <xs:element name="method" type="xs:string"/>
+  <xs:element name="amount" type="amountType"/>
+  <xs:element name="balance" type="balanceType"/>
+
+  <xs:element name="customer" type="customerType"/>
+  <xs:element name="timeframe" type="timeframeType"/>
+  <xs:element name="description" type="xs:string"/>
+  <xs:element name="earliestdate" type="xs:string"/>
+  <xs:element name="latestdate" type="xs:string"/>
+
+  <xs:element name="vendor" type="vendorType"/>
+  <xs:element name="vendorname" type="xs:string"/>
+
+  <xs:element name="provider" type="providerType"/>
+  <xs:element name="service" type="xs:string"/>
+
+  <xs:element name="contact" type="contactType"/>
+  <xs:element name="name" type="nameType"/>
+  <xs:element name="email" type="emailType"/>
+  <xs:element name="phone" type="phoneType"/>
+  <xs:element name="address" type="addressType"/>
+  <xs:element name="street" type="streetType"/>
+  <xs:element name="apartment" type="xs:string"/>
+  <xs:element name="city" type="xs:string"/>
+  <xs:element name="regioncode" type="xs:string"/>
+  <xs:element name="postalcode" type="xs:string"/>
+  <xs:element name="country" type="xs:string"/>
+  <xs:element name="url" type="xs:string"/>
+
+</xs:schema>

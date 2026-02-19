@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE adf SYSTEM "../schema/adf-1.0-errata.dtd">
+<adf>
+  <prospect status="resend">
+    <id sequence="1" source="crm">P-12345</id>
+    <id sequence="2" source="partner">ALT-9988</id>
+    <requestdate>2026-02-19T10:15:00Z</requestdate>
+    <vehicle interest="buy" status="used">
+      <id sequence="1" source="inventory">V-9001</id>
+      <year>2021</year>
+      <make>Toyota</make>
+      <model>RAV4</model>
+      <vin>2T3P1RFV5MW123456</vin>
+      <stock>STK-9001</stock>
+      <trim>XLE</trim>
+      <doors>4</doors>
+      <bodystyle>SUV</bodystyle>
+      <transmission>Automatic</transmission>
+      <odometer status="original" units="mi">24500</odometer>
+      <condition>Excellent</condition>
+      <colorcombination>
+        <interiorcolor>Black</interiorcolor>
+        <exteriorcolor>Blue</exteriorcolor>
+        <preference>first</preference>
+      </colorcombination>
+      <colorcombination>
+        <exteriorcolor>White</exteriorcolor>
+        <preference>second</preference>
+      </colorcombination>
+      <imagetag width="1024" height="768" alttext="front-angle">
+        https://example.com/images/car-1.jpg
+      </imagetag>
+      <price type="offer" currency="USD" delta="absolute" relativeto="invoice" source="dealer">
+        31995
+      </price>
+      <pricecomments>Includes destination fee.</pricecomments>
+      <option>
+        <optionname>Weather Package</optionname>
+        <manufacturercode>WP1</manufacturercode>
+        <stock>Y</stock>
+        <weighting>high</weighting>
+        <price type="quote" currency="USD">1295</price>
+      </option>
+      <option>
+        <optionname>Tow Hitch</optionname>
+        <weighting>medium</weighting>
+      </option>
+      <finance>
+        <method>loan</method>
+        <amount type="downpayment" limit="exact" currency="USD">3000</amount>
+        <amount type="monthly" limit="maximum" currency="USD">525</amount>
+        <balance type="finance" currency="USD">28995</balance>
+      </finance>
+      <comments>Prefer weekend appointment.</comments>
+    </vehicle>
+    <customer>
+      <contact primarycontact="1">
+        <name part="first" type="individual">Alex</name>
+        <name part="last" type="individual">Jordan</name>
+        <email preferredcontact="1">alex@example.com</email>
+        <phone type="cellphone" time="day" preferredcontact="1">+1-555-0101</phone>
+        <phone type="voice" time="evening" preferredcontact="0">+1-555-0102</phone>
+        <address type="home">
+          <street line="1">123 Main Street</street>
+          <street line="2">Unit 5A</street>
+          <apartment>5A</apartment>
+          <city>Austin</city>
+          <regioncode>TX</regioncode>
+          <postalcode>78701</postalcode>
+          <country>US</country>
+        </address>
+      </contact>
+      <id sequence="1" source="dealer-site">C-77</id>
+      <timeframe>
+        <description>2 weeks</description>
+        <earliestdate>2026-02-24</earliestdate>
+        <latestdate>2026-03-10</latestdate>
+      </timeframe>
+      <comments>Needs all-weather tires.</comments>
+    </customer>
+    <vendor>
+      <id sequence="1" source="dms">D-55</id>
+      <vendorname>Example Motors</vendorname>
+      <url>https://dealer.example.com</url>
+      <contact primarycontact="0">
+        <name part="full" type="business">Sales Team</name>
+        <phone type="voice" time="day" preferredcontact="1">+1-555-0200</phone>
+        <phone type="fax" time="day" preferredcontact="0">+1-555-0201</phone>
+      </contact>
+    </vendor>
+    <provider>
+      <id sequence="1" source="integration">PR-9</id>
+      <name part="full" type="business">Lead Router Inc.</name>
+      <service>lead-distribution</service>
+      <url>https://provider.example.com</url>
+      <email preferredcontact="0">support@provider.example.com</email>
+      <phone type="voice" time="day" preferredcontact="1">+1-555-0300</phone>
+      <contact>
+        <name part="first" type="individual">Riley</name>
+        <name part="last" type="individual">Morgan</name>
+        <email preferredcontact="1">riley@provider.example.com</email>
+      </contact>
+    </provider>
+  </prospect>
+</adf>
