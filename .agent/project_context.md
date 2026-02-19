@@ -30,3 +30,6 @@
 - **Topic:** Practical Payload Validation
   **Rule:** `scripts/validate-input.sh` should default to relaxed, order-insensitive checks; require `--strict` for full DTD/XSD enforcement.
   **Reason:** Real-world vendor payloads often vary in element order while still carrying required business data.
+- **Topic:** Relaxed Contactability Guardrail
+  **Rule:** In relaxed mode, require every customer `contact` to have at least one `email` or `phone`.
+  **Reason:** Order can vary in vendor payloads, but leads without any customer contact method are not actionable.
